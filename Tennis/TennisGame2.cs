@@ -35,7 +35,7 @@ public class TennisGame2 : ITennisGame
             var score = "";
             var pointDifference = Math.Abs(p1point - p2point);
             var highestPoint = Math.Max(p1point, p2point);
-            var winningPlayer = (p1point > p2point ? "player1" : "player2");
+            var winningPlayer = p1point > p2point ? "player1" : "player2";
             if (pointDifference > 0 && highestPoint < 4)
             {
                 score = (PointToString)p1point + "-" + (PointToString)p2point;
