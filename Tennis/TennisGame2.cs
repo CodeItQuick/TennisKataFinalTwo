@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Tennis
 {
     public enum PointToString
@@ -30,50 +33,28 @@ public class TennisGame2 : ITennisGame
         public string GetScore()
         {
             var score = "";
-            if (p1point == p2point && p1point < 3)
-            {
-                score = ((PointToString)p1point) +  "-All";
-            }
-
-            if (p1point > 0 && p2point == 0)
-            {
-                score = ((PointToString)p1point) + "-" + ((PointToString)p2point);
-            }
-
-            if (p2point > 0 && p1point == 0)
-            {
-                score = ((PointToString)p1point) + "-" + ((PointToString)p2point);
-            }
-
-            if (p1point > p2point && p1point < 4)
+            var pointDifference = Math.Abs(p1point - p2point);
+            var highestPoint = Math.Max(p1point, p2point);
+            var winningPlayer = (p1point > p2point ? "player1" : "player2");
+            if (pointDifference > 0 && highestPoint < 4)
             {
                 score = (PointToString)p1point + "-" + (PointToString)p2point;
             }
-
-            if (p2point > p1point && p2point < 4)
+            if (pointDifference == 0 && highestPoint < 4)
             {
-                score = (PointToString)p1point + "-" + (PointToString)p2point;
+                score = (PointToString)p1point +  "-All";
             }
-
-            if (p1point == p2point && p1point > 2)
+            if (pointDifference == 0 && highestPoint > 2)
+            {
                 score = PointToString.Deuce.ToString();
-            if (p1point > p2point && p2point >= 3)
-            {
-                score = "Advantage player1";
             }
-
-            if (p2point > p1point && p1point >= 3)
+            if (pointDifference == 1 && highestPoint > 3)
             {
-                score = "Advantage player2";
+                score = "Advantage " + winningPlayer;
             }
-
-            if (p1point >= 4 && p2point >= 0 && (p1point - p2point) >= 2)
+            if (pointDifference > 1 && highestPoint > 3)
             {
-                score = "Win for player1";
-            }
-            if (p2point >= 4 && p1point >= 0 && (p2point - p1point) >= 2)
-            {
-                score = "Win for player2";
+                score = "Win for " + winningPlayer;
             }
             return score;
         }
