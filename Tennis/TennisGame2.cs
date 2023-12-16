@@ -59,11 +59,6 @@ public class TennisGame2 : ITennisGame
             return score;
         }
 
-        private void P1Score()
-        {
-            p1point++;
-        }
-
         public void WonPoint(string player)
         {
             if (player == "player1")
