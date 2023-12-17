@@ -15,38 +15,36 @@ namespace Tennis
 
 public class TennisGame2 : ITennisGame
     {
-        private int p1point;
-        private int p2point;
+        private int _p1Point;
+        private int _p2Point;
 
-        private string p1res = "";
-        private string p2res = "";
-        private string player1Name;
-        private string player2Name;
+        private readonly string _player1Name;
+        private readonly string _player2Name;
 
         public TennisGame2(string player1Name, string player2Name)
         {
-            this.player1Name = player1Name;
-            p1point = 0;
-            this.player2Name = player2Name;
+            _player1Name = player1Name;
+            _player2Name = player2Name;
+            _p1Point = 0;
         }
 
         public string GetScore()
         {
             var score = "";
-            var pointDifference = Math.Abs(p1point - p2point);
-            var highestPoint = Math.Max(p1point, p2point);
-            var winningPlayer = p1point > p2point ? "player1" : "player2";
+            var pointDifference = Math.Abs(_p1Point - _p2Point);
+            var highestPoint = Math.Max(_p1Point, _p2Point);
+            var winningPlayer = _p1Point > _p2Point ? _player1Name : _player2Name;
             if (pointDifference == 0 && highestPoint > 2)
             {
                 return PointToString.Deuce.ToString();
             }
             if (pointDifference > 0 && highestPoint < 4)
             {
-                return (PointToString)p1point + "-" + (PointToString)p2point;
+                return (PointToString)_p1Point + "-" + (PointToString)_p2Point;
             }
             if (pointDifference == 0 && highestPoint < 4)
             {
-                return (PointToString)p1point +  "-All";
+                return (PointToString)_p1Point +  "-All";
             }
             if (pointDifference == 1 && highestPoint > 3)
             {
@@ -62,9 +60,9 @@ public class TennisGame2 : ITennisGame
         public void WonPoint(string player)
         {
             if (player == "player1")
-                p1point++;
+                _p1Point++;
             else
-                p2point++;
+                _p2Point++;
         }
 
     }
