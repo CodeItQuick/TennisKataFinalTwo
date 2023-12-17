@@ -17,7 +17,7 @@ namespace Tennis
 
         public string GetScore()
         {
-            string winningPlayerText;
+            string winningPlayerScoreText;
             
             if (_playerOneScore == _playerTwoScore && 
                 _playerOneScore >= 3)
@@ -27,16 +27,22 @@ namespace Tennis
             if (_playerOneScore < 4 && _playerTwoScore < 4)
             {
                 string[] scoreConversions = { "Love", "Fifteen", "Thirty", "Forty" };
-                winningPlayerText = scoreConversions[_playerOneScore];
-                return _playerOneScore == _playerTwoScore ? winningPlayerText + "-All" : winningPlayerText + "-" + scoreConversions[_playerTwoScore];
+                winningPlayerScoreText = scoreConversions[_playerOneScore];
+                if (_playerOneScore == _playerTwoScore)
+                {
+                    return winningPlayerScoreText + "-All";
+                }
+
+                var losingPlayerScoreText = scoreConversions[_playerTwoScore];
+                return winningPlayerScoreText + "-" + losingPlayerScoreText;
             }
 
-            winningPlayerText = _playerOneScore > _playerTwoScore ? _playerOneName : _playerTwoName;
+            winningPlayerScoreText = _playerOneScore > _playerTwoScore ? _playerOneName : _playerTwoName;
             if (Math.Abs(_playerOneScore - _playerTwoScore) == 1)
             {
-                return "Advantage " + winningPlayerText;
+                return "Advantage " + winningPlayerScoreText;
             }
-            return "Win for " + winningPlayerText;
+            return "Win for " + winningPlayerScoreText;
         }
 
         public void WonPoint(string playerName)
