@@ -18,18 +18,19 @@ namespace Tennis
         public string GetScore()
         {
             string winningPlayerText;
-            if ((_playerOneScore < 4 && _playerTwoScore < 4) 
-                && (_playerOneScore + _playerTwoScore < 6))
+            
+            if (_playerOneScore == _playerTwoScore && 
+                _playerOneScore >= 3)
+            {
+                return "Deuce";
+            }
+            if (_playerOneScore < 4 && _playerTwoScore < 4)
             {
                 string[] scoreConversions = { "Love", "Fifteen", "Thirty", "Forty" };
                 winningPlayerText = scoreConversions[_playerOneScore];
                 return _playerOneScore == _playerTwoScore ? winningPlayerText + "-All" : winningPlayerText + "-" + scoreConversions[_playerTwoScore];
             }
 
-            if (_playerOneScore == _playerTwoScore)
-            {
-                return "Deuce";
-            }
             winningPlayerText = _playerOneScore > _playerTwoScore ? _playerOneName : _playerTwoName;
             if (Math.Abs(_playerOneScore - _playerTwoScore) == 1)
             {
