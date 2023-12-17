@@ -36,25 +36,25 @@ public class TennisGame2 : ITennisGame
             var pointDifference = Math.Abs(p1point - p2point);
             var highestPoint = Math.Max(p1point, p2point);
             var winningPlayer = p1point > p2point ? "player1" : "player2";
+            if (pointDifference == 0 && highestPoint > 2)
+            {
+                return PointToString.Deuce.ToString();
+            }
             if (pointDifference > 0 && highestPoint < 4)
             {
-                score = (PointToString)p1point + "-" + (PointToString)p2point;
+                return (PointToString)p1point + "-" + (PointToString)p2point;
             }
             if (pointDifference == 0 && highestPoint < 4)
             {
-                score = (PointToString)p1point +  "-All";
-            }
-            if (pointDifference == 0 && highestPoint > 2)
-            {
-                score = PointToString.Deuce.ToString();
+                return (PointToString)p1point +  "-All";
             }
             if (pointDifference == 1 && highestPoint > 3)
             {
-                score = "Advantage " + winningPlayer;
+                return "Advantage " + winningPlayer;
             }
             if (pointDifference > 1 && highestPoint > 3)
             {
-                score = "Win for " + winningPlayer;
+                return "Win for " + winningPlayer;
             }
             return score;
         }
